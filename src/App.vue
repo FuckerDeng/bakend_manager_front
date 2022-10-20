@@ -3,7 +3,6 @@
 </script>
 
 <template>
-  <div class="w-20 h-20 bg-pink-400"></div>
   <router-view></router-view>
 </template>
 
