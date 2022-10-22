@@ -55,7 +55,7 @@ class Request {
             error.data = {};
             this.handleError(error);
             // return Promise.reject(error)
-            console.log(error.data)
+            console.log("请求异常：",error.data)
             return error
         })
     }

@@ -81,3 +81,8 @@ interface ImportMetaEnv {
   },
 
 ```
+
+
+### 项目启动说明
+
+- 如果要进行开发，启动vite服务器的同时，也要 启动tailwindcss监听服务，随时监听文件css变化以编译新目标css

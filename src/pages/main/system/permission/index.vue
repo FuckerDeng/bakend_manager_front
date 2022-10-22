@@ -2,7 +2,7 @@
 import { ref, reactive } from 'vue'
 </script>
 <template>
-    <div>用户面板</div>
+    <div>权限页</div>
 </template>
 <style scoped lang='scss'>
 

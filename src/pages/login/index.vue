@@ -2,9 +2,16 @@
 import { ref, reactive, onMounted } from 'vue'
 import useUser from "@/store/user"
 import { login } from "@/api/loginApi"
-import { useRouter } from "vue-router"
+import { RouteRecordRaw, useRouter } from "vue-router"
 import { FormInstance, FormRules } from 'element-plus';
+import mockMenus from "@/mock/sidemenus.json"
+import useMenus from "@/store/sidemenu"
 
+
+// console.log(allComponents);
+
+
+const menuStore = useMenus()
 const router = useRouter()
 const userStore = useUser()
 let btnDisable = ref(false)//防抖标志
@@ -13,29 +20,50 @@ let formData = reactive({
     password: ""
 })
 
+let reSetMenus = () => {
+    //添加 首页菜单
+    menuStore.menus = []
+    menuStore.menus.push(menuStore.dashboard)
+    menuStore.menus = menuStore.menus.concat(mockMenus)//此菜单应该为API结果
+    console.log("新菜单：",menuStore.menus);
+    
+}
+
 
 let loginSubmit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
     await formEl.validate((valid, fields) => {
         if (valid) {
             btnDisable.value = true;
-            login(formData).then((data) => {
 
-                btnDisable.value = false;
-                //TODO 测试用
-                data.code = 200
-                ElMessage.success("登录成功！")
-                if (data.code == 200) {
-                    //TODO 登录成功，记录数据，动态添加路由，跳转页面
-                    userStore.token = "test"
-                    router.push({ path: "/" })
-                    return
-                }
-                //登录失败给提示
-            }).catch((error) => {
-                btnDisable.value = true
-                ElMessage.error(error.data.msg)
-            })
+            //TODO 登录成功，记录用户数据，初始化菜单，跳转页面，菜单和路由使用 同一个 数据对象，格式见mock/sidemenus.json
+            userStore.token = "test"
+            //TODO 登录后重置菜单列表，
+            reSetMenus()
+            router.push({ path: "/" })
+            //TODO api链接
+            // login(formData).then((res) => {
+
+            //     btnDisable.value = false;
+            //     //TODO 测试用
+            //     res.code = 200
+            //     ElMessage.success("登录成功！")
+            //     if (res.code == 200) {
+            //         //TODO 登录成功，记录用户数据，初始化菜单，动态添加路由，跳转页面，菜单和路由使用 同一个 数据对象，格式见mock/sidemenus.json
+            //         userStore.token = "test"
+            //         //TODO 登录后重置菜单列表，
+            //         reSetMenus()
+            //         //重置路由
+            //         reSetRoutes( res.data.permissions)
+            //         //动态添加路由
+            //         router.push({ path: "/" })
+            //         return
+            //     }
+            //     //登录失败给提示
+            // }).catch((error) => {
+            //     btnDisable.value = true
+            //     ElMessage.error(error.data)
+            // })
         } else {
             console.log('error submit!', fields)
         }
@@ -50,7 +78,7 @@ const rules = reactive<FormRules>({
         { required: true, message: '请输入用户名', trigger: 'blur' },
     ],
     password: [
-        {required: true,message: '请输入密码',trigger: 'blur'},
+        { required: true, message: '请输入密码', trigger: 'blur' },
     ]
 })
 

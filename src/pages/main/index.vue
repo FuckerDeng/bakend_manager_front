@@ -1,16 +1,45 @@
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import SideMenu from '@/components/SideMenu.vue';
+import Head from '@/components/Head.vue';
+import Tabs from '@/components/Tabs.vue';
+
+
+
+
 </script>
 <template>
-    <div class="left">左</div>
-    <div class="right">
-        <div class="header">头</div>
-        <div class="content">
-            <RouterView></RouterView>
-        </div>
+  <div class="fixed main flex h-full inset-0 ">
+    <div ref="side" class="w-56 border-r-2 h-full">
+      <SideMenu></SideMenu>
     </div>
 
-</template>
-<style scoped lang='scss'>
+    <div class="right flex-1 w-full">
+      <Head></Head>
+      <Tabs></Tabs>
+      <el-scrollbar class="content mx-3 mt-3  bg-gray-200 h-full overflow-y-auto">
+        <RouterView></RouterView>
+    </el-scrollbar>
+    </div>
+  </div>
 
+
+</template>
+<style >
+.main {
+  height: 100vh;
+}
+
+.logo {
+  height: 43px;
+  line-height: 43px !important;
+}
+
+.logoImg {
+  width: 43px;
+  height: 43px;
+}
+.content{
+  
+}
 </style>
