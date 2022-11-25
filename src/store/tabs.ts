@@ -6,6 +6,13 @@ const useTabs = defineStore('tabs', {
     state: () => {
         return {
             // 所有这些属性都将自动推断其类型
+            defaultData:{
+                activeTab:"/dashboard",
+                tab:{
+                    name:"/dashboard",
+                    title:"首页"
+                }
+            },
             activeTab:"/dashboard",
             tabs:[{
                 name:"/dashboard",

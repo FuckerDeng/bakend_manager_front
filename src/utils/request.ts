@@ -25,7 +25,7 @@ class Request {
         this._axios?.interceptors.request.use((config: AxiosRequestConfig) => {
             let token = userStore.token || '';
             // console.log("获取到token："+token);
-            
+
             if (token) {
                 //把token添加到请求头部
                 config.headers = {
@@ -55,7 +55,7 @@ class Request {
             error.data = {};
             this.handleError(error);
             // return Promise.reject(error)
-            console.log("请求异常：",error.data)
+            console.log("请求异常：", error.data)
             return error
         })
     }
@@ -64,8 +64,9 @@ class Request {
      * @param error 
      */
     handleError(error: any) {
+
         if (!error || !error.response) {
-            error.data.msg = "连接到服务器失败";
+            error.data.msg = error.message;
             return
         }
         if (errorHandlers[error.response.status]) {
@@ -173,6 +174,31 @@ class Request {
     post<T = any>(url: string, params: any): Promise<R<T>> {
         return new Promise((resolve, reject) => {
             this._axios?.post<R<T>>(url, params, {
+                transformRequest: [(p) => {
+                    return JSON.stringify(p)
+                }],
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
+                resolve(res.data)
+            }).catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    /**
+     * rest方式Get
+     * @param url 
+     * @param params 
+     * @returns 
+     */
+    postRest<T = any>(url: string, params?: any,data?:any): Promise<R<T>> {
+        return new Promise((resolve, reject) => {
+            let realParam = this.getRestParms(params);
+            let realUrl = realParam ? `${url}/${realParam}` : url
+            this._axios?.post<R<T>>(realUrl, data, {
                 transformRequest: [(p) => {
                     return JSON.stringify(p)
                 }],

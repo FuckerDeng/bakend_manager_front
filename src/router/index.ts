@@ -106,7 +106,7 @@ router.beforeEach((to, from, next) => {
         let nowRoutes = router.getRoutes()
         let findRoute = nowRoutes.filter((route) => route.path === to.fullPath)
         if (findRoute) {
-            next(to.fullPath)
+            next({...to,replace:true})
             return
         }
         next("/error")

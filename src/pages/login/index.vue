@@ -6,6 +6,7 @@ import { RouteRecordRaw, useRouter } from "vue-router"
 import { FormInstance, FormRules } from 'element-plus';
 import mockMenus from "@/mock/sidemenus.json"
 import useMenus from "@/store/sidemenu"
+import useTabs from "@/store/tabs"
 
 
 // console.log(allComponents);
@@ -14,6 +15,7 @@ import useMenus from "@/store/sidemenu"
 const menuStore = useMenus()
 const router = useRouter()
 const userStore = useUser()
+const tabsStore = useTabs()
 let btnDisable = ref(false)//防抖标志
 let formData = reactive({
     username: "",
@@ -28,7 +30,13 @@ let reSetMenus = () => {
     console.log("新菜单：",menuStore.menus);
     
 }
-
+let reSetTabs = () => {
+    //添加 首页菜单
+    tabsStore.tabs=[]
+    tabsStore.tabs.push(tabsStore.defaultData.tab)
+    tabsStore.activeTab = tabsStore.defaultData.activeTab
+    
+}
 
 let loginSubmit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
@@ -40,6 +48,8 @@ let loginSubmit = async (formEl: FormInstance | undefined) => {
             userStore.token = "test"
             //TODO 登录后重置菜单列表，
             reSetMenus()
+            //登录后重置tab页数据
+            reSetTabs()
             router.push({ path: "/" })
             //TODO api链接
             // login(formData).then((res) => {

@@ -1,34 +1,125 @@
 [{
-    "path": "/sys",
-    "component":"",
-    "meta": {
-        "title": "系统管理",
-        "icon": "Setting"
+        "path": "/sys",
+        "component": "",
+        "meta": {
+            "title": "系统管理",
+            "icon": "Setting"
+        },
+        "children": [{
+                "path": "/sys/user",
+                "component": "system/user/index.vue",
+                "meta": {
+                    "title": "用户管理",
+                    "icon": "User"
+                }
+            },
+            {
+                "path": "/sys/role",
+                "component": "system/role/index.vue",
+                "meta": {
+                    "title": "角色管理",
+                    "icon": "Coordinate"
+                }
+            },
+            {
+                "path": "/sys/permission",
+                "component": "system/permission/index.vue",
+                "meta": {
+                    "title": "菜单管理",
+                    "icon": "Menu"
+                }
+            },
+            {
+                "path": "/sys/organization",
+                "component": "system/organization/index.vue",
+                "meta": {
+                    "title": "组织管理",
+                    "icon": "Menu"
+                }
+            },
+            {
+                "path": "/sys/department",
+                "component": "system/department/index.vue",
+                "meta": {
+                    "title": "部门管理",
+                    "icon": "Menu"
+                }
+            }
+        ]
     },
-    "children": [{
-            "path": "/sys/user",
-            "component": "system/user/index.vue",
-            "meta": {
-                "title": "用户管理",
-                "icon": "User"
-            }
+    {
+        "path": "/tools",
+        "component": "",
+        "meta": {
+            "title": "系统工具",
+            "icon": "Setting"
         },
-        {
-            "path": "/sys/role",
-            "component": "system/role/index.vue",
-            "meta": {
-                "title": "角色管理",
-                "icon": "Coordinate"
+        "children": [{
+                "path": "/tools/pageedit",
+                "component": "tools/pageedit/index.vue",
+                "meta": {
+                    "title": "可视化页面",
+                    "icon": "User"
+                }
+            },
+            {
+                "path": "/tools/codegenerator",
+                "component": "tools/codegenerator/index.vue",
+                "meta": {
+                    "title": "代码生成",
+                    "icon": "Coordinate"
+                }
+            },
+            {
+                "path": "/tools/dbtabledesign",
+                "component": "tools/dbtabledesign/index.vue",
+                "meta": {
+                    "title": "数据库表设计",
+                    "icon": "Coordinate"
+                }
+            },
+            {
+                "path": "/tools/ssh",
+                "component": "tools/ssh/index.vue",
+                "meta": {
+                    "title": "远程链接",
+                    "icon": "Coordinate"
+                }
+            },
+            {
+                "path": "/tools/webperformance",
+                "component": "tools/webperformance/index.vue",
+                "meta": {
+                    "title": "web网站性能指标测试",
+                    "icon": "Coordinate"
+                }
+            },
+            {
+                "path": "/tools/tableconfig",
+                "component": "tools/tableconfig/index.vue",
+                "meta": {
+                    "title": "表信息配置",
+                    "icon": "Coordinate"
+                }
             }
-        },
-        {
-            "path": "/sys/permission",
-            "component": "system/permission/index.vue",
-            "meta": {
-                "title": "菜单管理",
-                "icon": "Menu"
-            }
-        }
 
-    ]
-}]
+        ]
+    },
+    {
+        "path": "/todo",
+        "component": "",
+        "meta": {
+            "title": "待完成功能",
+            "icon": "Setting"
+        },
+        "children": [{
+                "path": "/todo/gantt",
+                "component": "todo/gantt/index.vue",
+                "meta": {
+                    "title": "甘特图列表",
+                    "icon": "User"
+                }
+            }
+        ]
+    }
+]

@@ -15,11 +15,13 @@ import Tabs from '@/components/Tabs.vue';
     </div>
 
     <div class="right flex-1 w-full">
+
       <Head></Head>
       <Tabs></Tabs>
-      <el-scrollbar class="content mx-3 mt-3  bg-gray-200 h-full overflow-y-auto">
+      <el-scrollbar class="content mx-3 mt-3  h-full overflow-y-auto">
         <RouterView></RouterView>
-    </el-scrollbar>
+        <div class="bt"></div>
+      </el-scrollbar>
     </div>
   </div>
 
@@ -39,7 +41,10 @@ import Tabs from '@/components/Tabs.vue';
   width: 43px;
   height: 43px;
 }
-.content{
-  
+.bt{
+  height: 1px;
+  width: 100%;
 }
+
+.content {}
 </style>
