@@ -15,13 +15,7 @@ let videoSize: {
 let gap = 12
 var asciiList = ['幂', '杨', '爱', '我', '　'];
 
-const dynamicGetImg = (name: string) => {
-    try {
-        return new URL(`../../../../assets/images/${name}`, import.meta.url).href
-    } catch (error) {
-        console.log(error)
-    }
-}
+
 
 </script>
 <template>

@@ -7,6 +7,12 @@ let clickRow = (row: any) => {
     console.log("表被点击");
 
 }
+
+let tableData = [
+    {
+        name: "测试"
+    }
+]
 </script>
 <template>
     <div class="outer">
@@ -29,10 +35,13 @@ let clickRow = (row: any) => {
                     </svg>
                     <span style="margin-left: 5px;">user</span>
                 </li>
+                <li class="row" @click="clickRow">
+                    <el-button>新增</el-button>
+                </li>
             </ul>
         </div>
         <div class="right">
-            <el-tabs v-model="nowTabName" >
+            <el-tabs v-model="nowTabName">
                 <el-tab-pane label="基础信息" name="first">
                     <ul>
                         <li>表名</li>
@@ -48,6 +57,9 @@ let clickRow = (row: any) => {
                         </li>
                         <li></li>
                     </ul>
+                    <el-table :data="tableData" border style="width: 100%">
+                        <el-table-column  label="name"  />
+                    </el-table>
                 </el-tab-pane>
             </el-tabs>
         </div>
